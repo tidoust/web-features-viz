@@ -39,8 +39,9 @@ Columns:
 
 **Note:** Features that have not shipped anywhere are not associated with any date in web-features and cannot be put on the timeline. As of January 2025, 32 features are in that category.
 
-Resulting graph: https://datawrapper.dwcdn.net/iIjGw/1/
-And in percentages: https://datawrapper.dwcdn.net/8UXj2/2/
+Resulting graph on Datawrapper: https://datawrapper.dwcdn.net/iIjGw/1/
+
+The percentage version shows the evolution of the relative distribution between the different types of features: https://datawrapper.dwcdn.net/8UXj2/2/
 
 #### Evolution of the duration from first implementation to newly available
 
