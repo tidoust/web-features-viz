@@ -12,6 +12,14 @@
 
 import { browsers, features, groups, snapshots } from 'web-features';
 import fs from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { exec } from 'node:child_process';
+import util from 'node:util';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
+const csvFolder = path.join(__dirname, 'csv');
+const pngFolder = path.join(__dirname, 'graphs');
 
 
 console.log(`Drop ≤, we're Sith and only deal in absolutes...`);
@@ -185,27 +193,31 @@ console.log(`- ${groups.all.merged.baseline.discouraged} discouraged`);
 console.log(`Compile stats... done`);
 
 
-let content = '';
-console.log(`Evolution of the number of web features...`);
-content =
-  [['Date', 'Widely available', 'Newly available', 'Implemented somewhere']]
-  .concat(
-    groups.all.specific.timeline
+const graphs = [
+  {
+    title: 'Evolution of the number of web features',
+    id: 'timeline-number',
+    data: 'timeline-number.csv',
+    datawrapperId: 'iIjGw',
+    headers: ['Date', 'Widely available', 'Newly available',
+              'Implemented somewhere'],
+    content: groups => groups.all.specific.timeline
       .map(d => [d.date, d.high, d.low - d.high, d.first - d.low])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('timeline-number.csv', content, 'utf8');
-console.log(`- wrote timeline-number.csv`);
-console.log(`Evolution of the number of web features... done`);
-
-
-console.log(`Evolution of the duration from first implementation to newly available...`);
-content =
-  [['Year', 'Maximum duration', 'Average duration', 'Median duration',
-    'Minimum duration', 'Number of features']]
-  .concat(
-    groups.all.specific.durations
+  },
+  {
+    title: 'Evolution of the number of web features (%)',
+    id: 'timeline-percent',
+    data: 'timeline-number.csv',
+    datawrapperId: '8UXj2'
+  },
+  {
+    title: 'Evolution of the duration from first implementation to newly available',
+    id: 'timeline-durations',
+    data: 'timeline-durations.csv',
+    datawrapperId: 'NSz5R',
+    headers: ['Year', 'Maximum duration', 'Average duration', 'Median duration',
+              'Minimum duration', 'Number of features'],
+    content: groups => groups.all.specific.durations
       .filter(y => y.first2low.length > 0)
       .map(y => [
         y.year,
@@ -215,20 +227,15 @@ content =
         y.first2low[0],
         y.first2low.length
       ])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('timeline-durations.csv', content, 'utf8');
-console.log(`- wrote timeline-durations.csv`);
-console.log(`Evolution of the duration from first implementation to newly available... done`);
-
-
-console.log(`Groups sorted by total number of features...`);
-content =
-  [['Group', 'Widely available', 'Newly available',
-    'Limited availability', 'Discouraged']]
-  .concat(
-    Object.values(groups)
+  },
+  {
+    title: 'Groups sorted by total number of features',
+    id: 'groups-features',
+    data: 'groups-features.csv',
+    datawrapperId: 'JRT5t',
+    headers: ['Group', 'Widely available', 'Newly available',
+              'Limited availability', 'Discouraged'],
+    content: groups => Object.values(groups)
       .filter(group => !group.fullname.match(/ > /))
       .filter(group => group.fullname !== 'All features')
       .sort((g1, g2) => g2.merged.baseline.total - g1.merged.baseline.total)
@@ -239,22 +246,16 @@ content =
         group.merged.baseline.limited,
         group.merged.baseline.discouraged
       ])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('groups-features.csv', content, 'utf8');
-console.log(`- wrote groups-features.csv`);
-console.log(`Groups sorted by total number of features... done`);
-
-
-console.log(`Groups sorted by percentage of widely available features...`);
-content =
-  [['Group', 'Widely available', 'Newly available',
-    'Limited availability', 'Discouraged']]
-  .concat(
-    Object.values(groups)
+  },
+  {
+    title: 'Groups sorted by percentage of widely available features',
+    id: 'groups-percent',
+    data: 'groups-percent.csv',
+    datawrapperId: 'IPoM6',
+    headers: ['Group', 'Widely available', 'Newly available',
+              'Limited availability', 'Discouraged'],
+    content: groups => Object.values(groups)
       .filter(group => !group.fullname.match(/ > /))
-      .filter(group => group.fullname !== 'All features')
       .sort((g1, g2) => {
         const res = 
           Math.round(g2.merged.baseline.high / g2.merged.baseline.total * 100) -
@@ -267,26 +268,21 @@ content =
         }
       })
       .map(group => [
-        group.fullname,
+        group.fullname === 'All features' ? `<b>${group.fullname}</b>` : group.fullname,
         group.merged.baseline.high,
         group.merged.baseline.low,
         group.merged.baseline.limited,
         group.merged.baseline.discouraged
       ])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('groups-percent.csv', content, 'utf8');
-console.log(`- wrote groups-percent.csv`);
-console.log(`Groups sorted by percentage of widely available features... done`);
-
-
-console.log(`Groups sorted by number of features that are newly available...`);
-content =
-  [['Group', 'Widely available', 'Newly available',
-    'Limited availability', 'Discouraged']]
-  .concat(
-    Object.values(groups)
+  },
+  {
+    title: 'Groups sorted by number of features that are newly available',
+    id: 'groups-low',
+    data: 'groups-low.csv',
+    datawrapperId: 'vTw7q',
+    headers: ['Group', 'Widely available', 'Newly available',
+              'Limited availability', 'Discouraged'],
+    content: groups => Object.values(groups)
       .filter(group => !group.fullname.match(/ > /))
       .filter(group => group.fullname !== 'All features')
       .sort((g1, g2) => g2.merged.baseline.low - g1.merged.baseline.low)
@@ -297,20 +293,15 @@ content =
         group.merged.baseline.limited,
         group.merged.baseline.discouraged
       ])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('groups-low.csv', content, 'utf8');
-console.log(`- wrote groups-low.csv`);
-console.log(`Groups sorted by number of features that are newly available... done`);
-
-
-console.log(`Groups sorted by number of features with limited availability...`);
-content =
-  [['Group', 'Widely available', 'Newly available',
-    'Limited availability', 'Discouraged']]
-  .concat(
-    Object.values(groups)
+  },
+  {
+    title: 'Groups sorted by number of features with limited availability',
+    id: 'groups-limited',
+    data: 'groups-limited.csv',
+    datawrapperId: 'O00YF',
+    headers: ['Group', 'Widely available', 'Newly available',
+              'Limited availability', 'Discouraged'],
+    content: groups => Object.values(groups)
       .filter(group => !group.fullname.match(/ > /))
       .filter(group => group.fullname !== 'All features')
       .sort((g1, g2) => g2.merged.baseline.limited - g1.merged.baseline.limited)
@@ -321,12 +312,74 @@ content =
         group.merged.baseline.limited,
         group.merged.baseline.discouraged
       ])
-  )
-  .map(a => a.join(';'))
-  .join('\n');
-await fs.writeFile('groups-limited.csv', content, 'utf8');
-console.log(`- wrote groups-limited.csv`);
-console.log(`Groups sorted by number of features with limited availability... done`);
+  }
+];
+
+
+for (const graph of graphs) {
+  if (!graph.headers) {
+    // Percentage graphs may reuse data from another CSV file
+    continue;
+  }
+  console.log(`${graph.title}...`);
+  const content = [graph.headers]
+    .concat(graph.content(groups))
+    .map(a => a.join(';'))
+    .join('\n');
+  await fs.writeFile(path.join(csvFolder, graph.data), content, 'utf8');
+  console.log(`- wrote ${graph.data}`);
+  console.log(`${graph.title}... done`);
+}
+
+
+// Consider update Datawrapper graphs and PNG files if requested and possible
+if (process.argv[2] !== '--graphs') {
+  process.exit(0);
+}
+let DATAWRAPPER_TOKEN = null;
+try {
+  const configFileUrl = 'file:///' +
+    path.join(process.cwd(), 'config.json').replace(/\\/g, '/');
+  const { default: env } = await import(
+    configFileUrl,
+    { with: { type: 'json' } }
+  );
+  DATAWRAPPER_TOKEN = env.DATAWRAPPER_TOKEN
+}
+catch {
+}
+if (!DATAWRAPPER_TOKEN) {
+  console.warn(`No Datawrapper API token found... cannot update graphs`);
+  process.exit(0);
+}
+
+console.log(`Update Datawrapper graphs...`);
+for (const graph of graphs) {
+  await run(`curl --request PUT \
+    --url "https://api.datawrapper.de/v3/charts/${graph.datawrapperId}/data" \
+    --upload-file "${path.join(csvFolder, graph.data)}" \
+    --header "Authorization: Bearer ${DATAWRAPPER_TOKEN}" \
+    --silent`);
+  console.log(`- updated graph ${graph.id} with ${graph.data}`);
+  await run(`curl --request POST \
+    --url "https://api.datawrapper.de/v3/charts/${graph.datawrapperId}/publish" \
+    --header "Authorization: Bearer ${DATAWRAPPER_TOKEN}" \
+    --silent`);
+  console.log(`- re-published graph ${graph.id} with ${graph.data}`);
+}
+console.log(`Update Datawrapper graphs... done`);
+
+console.log(`Export Datawrapper graphs...`);
+for (const graph of graphs) {
+  await run(`curl --request GET \
+    --url "https://api.datawrapper.de/v3/charts/${graph.datawrapperId}/export/png?unit=px&mode=rgb&plain=true&zoom=2&borderWidth=20" \
+    --header "accept: */*" \
+    --output "${path.join(pngFolder, graph.id)}.png" \
+    --header "Authorization: Bearer ${DATAWRAPPER_TOKEN}" \
+    --silent`);
+  console.log(`- wrote ${graph.id}.png`);
+}
+console.log(`Export Datawrapper graphs... done`);
 
 
 /**********************************************************
@@ -420,4 +473,26 @@ function getMedian(arr) {
 function getAverage(arr) {
   const sum = arr.reduce((tot, curr) => tot + curr, 0);
   return Math.floor(sum / arr.length);
+}
+
+async function run(cmd, options) {
+  try {
+    const { stdout, stderr } = await util.promisify(exec)(cmd, options);
+    if (stderr && !options?.ignoreErrors) {
+      console.error(`Could not run command: ${cmd}`);
+      console.error(stderr);
+      process.exit(1);
+    }
+    return { stdout: stdout.trim(), stderr: stderr.trim() };
+  }
+  catch (err) {
+    if (options?.ignoreErrors) {
+      return { stdout: '', stderr: err.toString().trim() };
+    }
+    else {
+      console.error(`Could not run command: ${cmd}`);
+      console.error(err.toString());
+      process.exit(1);
+    }
+  }
 }

@@ -1,0 +1,40 @@
+Group;Widely available;Newly available;Limited availability;Discouraged
+CSS;203;74;89;8
+Ungrouped features;93;35;102;5
+HTML;130;10;16;0
+JavaScript;119;19;11;1
+WebGL;20;2;19;0
+WebAssembly;10;5;5;0
+Performance;3;2;10;1
+Canvas;3;5;4;0
+Scrolling;3;4;5;0
+WebXR;0;0;11;0
+Security;6;2;2;0
+Web Components;5;2;3;0
+Animation;5;1;2;1
+Clipping, shapes and masking;4;2;2;1
+Print media;1;2;3;1
+Progressive web app;0;0;7;0
+Sensors;0;1;6;0
+Clipboard;1;1;4;0
+Images;2;0;4;0
+Storage;1;2;3;0
+Credential management;1;0;4;0
+Messaging;4;1;0;0
+Ruby;1;2;2;0
+SVG;4;0;1;0
+Gamepad;1;0;3;0
+JavaScript modules;1;1;2;0
+Selection;1;0;3;0
+Speech;1;0;3;0
+View Transitions;0;0;4;0
+WebDriver;0;0;4;0
+WebRTC;2;1;1;0
+Web Audio;3;0;0;0
+XML;3;0;0;0
+Compute pressure;0;0;2;0
+File system access;0;1;1;0
+Parsing and serialization;2;0;0;0
+Payments;0;0;2;0
+Streams;0;0;2;0
+Text fragments;0;2;0;0
