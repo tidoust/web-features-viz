@@ -2,7 +2,7 @@
 
 This repository contains CSV files with statistics computed from [web-features](https://github.com/web-platform-dx/web-features), PNG exports of corresponding graphs generated through [Datawrapper](https://www.datawrapper.de/), and the Node.js script used to produce the CSV files and graphs.
 
-The goal with the CSV files is to explore possible visualizations of the catalog of features in web-features and assess whether these visualizations tell us something useful about the web platform.
+The goal with the CSV files is to explore possible visualizations of the catalog of features in web-features and assess whether these visualizations tell us something useful about the web platform as seen from main browsers.
 
 **Note:** CSV files use `;` as separator.
 
