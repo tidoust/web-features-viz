@@ -31,13 +31,13 @@ The script attempts to update and re-publish Datawrapper graphs if it gets run w
 
 You should be able to generate graphs yourself from the CSV files using Datawrapper or your favorite graph library or service.
 
-## Generated CSV files
+## Generated CSV files and graphs
 
 ### Timelines
 
 #### Evolution of the number of web features
 
-The `timeline-number.csv` file contains the evolution of the number of web features over time per Baseline type.
+The [`timeline-number.csv`](csv/timeline-number.csv) file contains the evolution of the number of web features over time per Baseline type.
 
 Columns:
 - `Date`: The date in format `YYYY-MM-DD`. Dates that appear in the file are typically dates at which a new version of some browser was released.
@@ -47,13 +47,17 @@ Columns:
 
 **Note:** Features that have not shipped anywhere are not associated with any date in web-features and do not appear in the CSV file. As of January 2025, 32 features (out of >1000 features) are in that category.
 
-Resulting Datawrapper graph: https://datawrapper.dwcdn.net/iIjGw/1/
+The resulting Datawrapper graph shows the [evolution of the number of web features](https://datawrapper.dwcdn.net/iIjGw/1/) that compose the web platform (see PNG export below). The two highlighted dates are 2020-01-15 when Edge switched to Chromium, making a number of features newly available, and 2022-07-15 (30 months later) when the same features transitioned to widely available.
 
-The percentage version shows the evolution of the relative distribution between the different types of features: https://datawrapper.dwcdn.net/8UXj2/2/
+![PNG export of the evolution of the number of web features](graphs/timeline-number.png)
+
+Producing a graph with percentages is useful to visualize the [evolution of the distribution of features](https://datawrapper.dwcdn.net/8UXj2/2/) between widely available features, newly available features and features with limited availability, illustrating how inteoperability progresses over time and how the web platform grows.
+
+![PNG export of the evolution of the distribution of web features](graphs/timeline-percent.png) 
 
 #### Evolution of the duration from first implementation to newly available
 
-The `timeline-durations.csv` file contains the evolution of the duration needed for a feature to go from first implementation available to newly available from year to year.
+The [`timeline-durations.csv`](csv/timeline-durations.csv) file contains the evolution of the duration needed for a feature to go from first implementation available to newly available from year to year.
 
 Columns:
 - `Year`: The year being considered.
@@ -65,7 +69,9 @@ Columns:
 
 **Note:** What about going from first implementation to widely available? The data is mostly uninteresting there: given the [current definition of widely available](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md#wider-support-high-status), in 99.9% of all cases, you just need to add 910 days (30 months) to the durations reported in `timeline-durations.csv`.
 
-Resulting graph: https://datawrapper.dwcdn.net/NSz5R/2/
+The resulting Datawrapper graph shows the [evolution of the duration from first implementation to newly available](https://datawrapper.dwcdn.net/NSz5R/2/)
+
+![PNG export of the evolution of the duration from first implementation to newly available](graphs/timeline-durations.png). The web platform seems to be standardizing features at a faster pace in recent years.
 
 ### Per feature group
 
@@ -86,24 +92,33 @@ Main difference between the files is how lines get sorted.
 
 #### Groups sorted by total number of features
 
-The `groups-features.csv` file contains the list of groups sorted by the total number of features they contribute to the web platform (from most to least).
+The [`groups-features.csv`](csv/groups-features.csv) file contains the list of groups sorted by the total number of features they contribute to the web platform (from most to least).
 
-https://datawrapper.dwcdn.net/JRT5t/2/
+The resulting Datawrapper graph shows the [list of groups sorted by number of features](https://datawrapper.dwcdn.net/JRT5t/2/). The graph does not strike me as immensely useful for reasons mentioned above.
+
+![PNG export of the list of groups sorted by number of features](graphs/groups-features.png)
 
 #### Groups sorted by percentage of widely available features
 
-The `groups-percent.csv` file contains the list of groups sorted by the percentage of widely available features they contain (from most to least). This view is meant to capture the most stable - or possibly ossified - parts of the web platform.
+The [`groups-percent.csv`](csv/groups-percent.csv) file contains the list of groups sorted by the percentage of widely available features they contain (from most to least).
 
-https://datawrapper.dwcdn.net/IPoM6/2/
+The resulting Datawrapper graph shows the [list of groups sorted by their percentage of widely available features](https://datawrapper.dwcdn.net/IPoM6/2/). This view somewhat illustrates the most stable - or possibly ossified - parts of the web platform, with the same caveats that it's probably not a good idea to look too much into groups.
+
+![PNG export of the list of groups sorted by their percentage of widely available features](graphs/groups-percent.png)
 
 #### Groups sorted by number of newly available features
 
-The `groups-low.csv` file contains the list of groups sorted by the number of newly available features they contain (from most to least). This view is meant to capture the areas where the web platform currently grows (in an interoperable manner).
+The [`groups-low.csv`](csv/groups-low.csv) file contains the list of groups sorted by the number of newly available features they contain (from most to least).
 
-https://datawrapper.dwcdn.net/vTw7q/2/
+The resulting Datawrapper graph shows the [list of groups sorted by number of newly available features](https://datawrapper.dwcdn.net/vTw7q/2/). This view somewhat illustrates the areas where the web platform currently grows in an interoperable manner.
+
+![PNG export of the list of groups sorted by number of newly available features](graphs/groups-low.png)
 
 #### Groups sorted by number of features with limited availability
 
-The `groups-limited.csv` file contains the list of groups sorted by the number of features that have limited availability they contain (from most to least). This view is meant to capture the parts of the web platform that are still in flux because they contain features that are either still being worked upon or for which there is disagreement among core browser vendors.
+The [`groups-limited.csv`](csv/groups-limited.csv) file contains the list of groups sorted by the number of features that have limited availability they contain (from most to least).
 
-https://datawrapper.dwcdn.net/O00YF/2/
+The resulting Datawrapper graph shows the [list of groups sorted by number of features with limited availability](https://datawrapper.dwcdn.net/O00YF/2/). This view is meant to capture the parts of the web platform that are still in flux because they contain features that are either still being worked upon or for which there is disagreement among core browser vendors.
+
+![PNG export of the list of groups sorted by number of newly available features](graphs/groups-limited.png)
+
