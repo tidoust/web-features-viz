@@ -77,7 +77,9 @@ The resulting Datawrapper graph shows the [evolution of the duration from first 
 
 All other files list feature groups. Only groups that don't have a parent group are listed (so `CSS` but not `CSS > Layout`).
 
-**Note:** Resulting data and graphs need to be read with care because comparing groups is sometimes awkward: some groups are very large (>100 features) while others are very small (<5 features), and features themselves vary in granularity. For example, WebRTC is a small group composed of a handful of features, and yet it's a large set of technologies. Also, about one fifth of features are not part of any group for now.
+Visualizations would be more directly useful if groups partitioned the platform in similar chunks of ~80-100 features. That's not the case today: a few groups are very large (100+ features) while others are very small (5 features or less). Features themselves vary in granularity. For example, WebRTC is a small group composed of a handful of features, and yet it's a large set of technologies. On top of it, about one fifth of features are not part of any group for now.
+
+Comparing groups is relatively awkward as a result. Data and graphs need to be read with care.
 
 Columns are the same in all files:
 - `Group`: The group name. Only groups that don't have parents are listed.
@@ -86,7 +88,7 @@ Columns are the same in all files:
 - `Limited availability`: Number of features with limited availability in the group.
 - `Discouraged`: Number of discouraged features in the group.
 
-**Note:** That's rare but a feature may appear in more than one group. As such, it may be counted twice.
+**Note:** That's rare but a feature may appear in more than one group and thus may be counted more than once.
 
 Main difference between the files is how lines get sorted.
 
