@@ -2,11 +2,9 @@
 
 This repository contains CSV files with statistics computed from [web-features](https://github.com/web-platform-dx/web-features), PNG exports of corresponding graphs generated through [Datawrapper](https://www.datawrapper.de/), and the Node.js script used to produce the CSV files and graphs.
 
-The goal with the CSV files is to explore possible visualizations of the catalog of features in web-features and assess whether these visualizations tell us something useful about the web platform as seen from main browsers.
+Goal is to explore possible visualizations of the catalog of features in web-features and assess whether these visualizations tell us something useful about the web platform as seen from main browsers.
 
-**Note:** CSV files use `;` as separator.
-
-**Note:** The files are not automatically updated and may well be out of sync with the web-features catalog when you read this! Check last modification dates.
+**Note:** The files and graphs are not automatically updated and may well be out of sync with the web-features catalog when you read this! Check last modification dates.
 
 
 ## How to run the script
@@ -31,9 +29,13 @@ The script attempts to update and re-publish Datawrapper graphs if it gets run w
 
 You should be able to generate graphs yourself from the CSV files using Datawrapper or your favorite graph library or service.
 
+**Note:** CSV files use `;` as separator.
+
 ## Generated CSV files and graphs
 
 ### Timelines
+
+**Note:** ~50 features have support dates that start with `≤` in web-features to indicate that support started before these dates. This nuance is dropped to compute statistics. This makes features appear later than they should when looking at the evolution of the number of web features, and reduces the duration from first implementation to newly available. Impact should remain minimal and I believe underlying dates are all before mid-2020.
 
 #### Evolution of the number of web features
 
@@ -45,7 +47,7 @@ Columns:
 - `Newly available`: The number of newly available (but not widely available) features at that date
 - `Implemented somewhere`: The number of features that were implemented in at least one browser (but not available in all browsers) at that date.
 
-**Note:** Features that have not shipped anywhere are not associated with any date in web-features and do not appear in the CSV file. As of January 2025, 32 features (out of >1000 features) are in that category.
+**Note:** Features that have not shipped anywhere are not associated with any date in web-features and do not appear in the CSV file. As of January 2025, 32 features (out of 1000+ features) are in that category.
 
 The resulting Datawrapper graph shows the [evolution of the number of web features](https://datawrapper.dwcdn.net/iIjGw/1/) that compose the web platform (see PNG export below). The two highlighted dates are 2020-01-15 when Edge switched to Chromium, making a number of features newly available, and 2022-07-15 (30 months later) when the same features transitioned to widely available.
 
