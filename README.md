@@ -49,11 +49,15 @@ Columns:
 
 **Note:** Features that have not shipped anywhere are not associated with any date in web-features and do not appear in the CSV file. As of January 2025, 32 features (out of 1000+ features) are in that category.
 
-The resulting Datawrapper graph shows the [evolution of the number of web features](https://datawrapper.dwcdn.net/iIjGw/1/) that compose the web platform (see PNG export below). The two highlighted dates are 2020-01-15 when Edge switched to Chromium, making a number of features newly available, and 2022-07-15 (30 months later) when the same features transitioned to widely available.
+The resulting Datawrapper graph shows the [evolution of the number of web features](https://datawrapper.dwcdn.net/iIjGw/1/) that compose the web platform (see PNG export below). The graph needs to be read with care, especially the first half:
+
+1. Keep in mind that support data is only for browsers in the [core browser set](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md#core-browser-set) (Chrome, Edge, Firefox, Safari). For example, the graph contains no information about feature support in Internet Explorer (started in 1995).
+2. First version of Safari shipped on 23 June 2003. That is the first date on the graph. Firefox was next on 9 November 2004. Chrome first appeared about five years later on 11 December 2009. Edge was the last one to appear on 29 July 2015. No features are flagged as newly available or widely available before 29 July 2015 simply because the definition of Baseline starts with the first release of Edge. These dates are highlighted through vertical lines.
+2. Edge switched to Chromium on 15 January 2020. That created a bump of newly available features. These features became widely available on 15 July 2022 (30 months later). These dates are the last two vertical lines in the graph.
 
 ![PNG export of the evolution of the number of web features](graphs/timeline-number.png)
 
-Producing a graph with percentages is useful to visualize the [evolution of the distribution of features](https://datawrapper.dwcdn.net/8UXj2/2/) between widely available features, newly available features and features with limited availability, illustrating how inteoperability progresses over time and how the web platform grows.
+Producing a graph with percentages is useful to visualize the [evolution of the distribution of features](https://datawrapper.dwcdn.net/8UXj2/2/) between widely available features, newly available features and features with limited availability, illustrating how interoperability progresses over time and how the web platform grows. The graph starts on 29 July 2015 for the reasons mentioned above.
 
 ![PNG export of the evolution of the distribution of web features](graphs/timeline-percent.png) 
 
@@ -69,7 +73,7 @@ Columns:
 - `Minimum duration`: The minimum duration (in days) for a feature that became newly available during the year to go from first implementation to newly available.
 - `Number of features`: The number of features that became newly available during the year.
 
-**Note:** What about going from first implementation to widely available? The data is mostly uninteresting there: given the [current definition of widely available](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md#wider-support-high-status), in 99.9% of all cases, you just need to add 910 days (30 months) to the durations reported in `timeline-durations.csv`.
+**Note:** What about going from first implementation to widely available? The data is mostly uninteresting: given the [current definition of widely available](https://github.com/web-platform-dx/web-features/blob/main/docs/baseline.md#wider-support-high-status), in 99.9% of all cases, you just need to add 910 days (30 months) to the durations reported in `timeline-durations.csv`.
 
 The resulting Datawrapper graph shows the [evolution of the duration from first implementation to newly available](https://datawrapper.dwcdn.net/NSz5R/2/)
 
