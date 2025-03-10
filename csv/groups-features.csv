@@ -1,8 +1,8 @@
 Group;Widely available;Newly available;Limited availability;Discouraged
-CSS;204;73;89;8
-Ungrouped features;93;35;103;6
-HTML;130;10;16;0
-JavaScript;119;19;11;1
+CSS;204;73;92;11
+Ungrouped features;93;35;111;12
+HTML;130;10;19;0
+JavaScript;123;15;11;6
 WebGL;20;2;19;0
 WebAssembly;10;5;5;0
 Performance;3;2;10;1
@@ -13,10 +13,11 @@ Security;6;2;2;0
 Web Components;5;2;3;0
 Animation;5;1;2;1
 Clipping, shapes and masking;4;2;2;1
+Progressive web app;0;0;8;0
+Clipboard;1;1;4;1
+DOM;3;2;1;1
 Print media;1;2;3;1
-Progressive web app;0;0;7;0
 Sensors;0;1;6;0
-Clipboard;1;1;4;0
 Images;2;0;4;0
 Storage;1;2;3;0
 Credential management;1;0;4;0

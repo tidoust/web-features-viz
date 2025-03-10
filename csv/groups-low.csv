@@ -1,12 +1,13 @@
 Group;Widely available;Newly available;Limited availability;Discouraged
-CSS;204;73;89;8
-Ungrouped features;93;35;103;6
-JavaScript;119;19;11;1
-HTML;130;10;16;0
+CSS;204;73;92;11
+Ungrouped features;93;35;111;12
+JavaScript;123;15;11;6
+HTML;130;10;19;0
 Canvas;3;5;4;0
 WebAssembly;10;5;5;0
 Scrolling;3;4;5;0
 Clipping, shapes and masking;4;2;2;1
+DOM;3;2;1;1
 Performance;3;2;10;1
 Print media;1;2;3;1
 Ruby;1;2;2;0
@@ -16,7 +17,7 @@ Text fragments;0;2;0;0
 Web Components;5;2;3;0
 WebGL;20;2;19;0
 Animation;5;1;2;1
-Clipboard;1;1;4;0
+Clipboard;1;1;4;1
 File system access;0;1;1;0
 JavaScript modules;1;1;2;0
 Messaging;4;1;0;0
@@ -28,7 +29,7 @@ Gamepad;1;0;3;0
 Images;2;0;4;0
 Parsing and serialization;2;0;0;0
 Payments;0;0;2;0
-Progressive web app;0;0;7;0
+Progressive web app;0;0;8;0
 Selection;1;0;3;0
 Speech;1;0;3;0
 Streams;0;0;2;0
